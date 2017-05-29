@@ -8,5 +8,9 @@ $ git submodule add git@github.com:yukihirai0505/scala-request-json.git git-subm
 Update submodules
 
 ```
+$ git submodule update --init --recursive
+```
+
+```
 $ git submodule foreach git pull origin master
 ```
