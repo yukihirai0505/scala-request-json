@@ -12,6 +12,8 @@ libraryDependencies ++= {
     "com.typesafe.play" % "play-json_2.11" % "2.5.9",
     "net.databinder.dispatch" %% "dispatch-core" % "0.11.3",
     "com.netaporter" %% "scala-uri" % "0.4.16",
+    "ai.x" %% "play-json-extensions" % "0.8.0",
+    "com.github.tototoshi" %% "play-json-naming" % "1.1.0",
     "org.scalatest" %% "scalatest" % "2.2.4" % "test"
   )
 }
