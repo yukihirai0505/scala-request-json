@@ -4,6 +4,8 @@ version := "1.0"
 
 scalaVersion := "2.11.7"
 
+lazy val scalaRequestJson = Project(id = "scala-request-json", base = file("./"))
+
 // Change this to another test framework if you prefer
 libraryDependencies ++= {
   Seq(
