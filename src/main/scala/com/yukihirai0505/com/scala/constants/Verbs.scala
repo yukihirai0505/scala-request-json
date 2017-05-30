@@ -9,4 +9,5 @@ object Verbs {
   case object POST extends Verbs("POST")
   case object PUT extends Verbs("PUT")
   case object DELETE extends Verbs("DELETE")
+  case object PATCH extends Verbs("PATCH")
 }
