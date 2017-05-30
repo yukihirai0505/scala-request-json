@@ -17,7 +17,45 @@ libraryDependencies ++= {
     "org.scalatest" %% "scalatest" % "2.2.4" % "test"
   )
 }
+publishMavenStyle := true
 
-// Uncomment to use Akka
-//libraryDependencies += "com.typesafe.akka" %% "akka-actor" % "2.3.11"
+publishTo := {
+  val nexus = "https://oss.sonatype.org/"
+  if (isSnapshot.value)
+    Some("snapshots" at nexus + "content/repositories/snapshots")
+  else
+    Some("releases" at nexus + "service/local/staging/deploy/maven2")
+}
 
+publishArtifact in Test := false
+
+pomIncludeRepository := { _ => false }
+
+organization := "com.yukihirai0505"
+
+organizationName := "com.yukihirai0505"
+
+organizationHomepage := Some(url("https://yukihirai0505.github.io"))
+
+description := "A Scala library for the Asynchronous Json Request"
+
+pomExtra :=
+  <url>https://github.com/yukihirai0505/scala-request-json</url>
+    <licenses>
+      <license>
+        <name>MIT</name>
+        <url>https://github.com/yukihirai0505/scala-request-json/blob/master/LICENSE.txt</url>
+        <distribution>repo</distribution>
+      </license>
+    </licenses>
+    <scm>
+      <url>git@github.com:yukihirai0505/scala-request-json.git</url>
+      <connection>scm:git:git@github.com:yukihirai0505/scala-request-json.git</connection>
+    </scm>
+    <developers>
+      <developer>
+        <id>yukihirai0505</id>
+        <name>Yuki Hirai</name>
+        <url>https://yukihirai0505.github.io</url>
+      </developer>
+    </developers>
