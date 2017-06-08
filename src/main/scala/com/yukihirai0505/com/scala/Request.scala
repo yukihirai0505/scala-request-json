@@ -9,6 +9,15 @@ import dispatch._
 
 object Request {
 
+  /***
+    * Get Base request with cookies
+    * @param requestUrl
+    * @param cookies
+    */
+  def getBaseReq(requestUrl: String, cookies: List[Cookie] = List.empty[Cookie]): Req = {
+    addCookies(cookies, url(requestUrl))
+  }
+
   /**
     * Send the prepared request to an URL and parse the response to an appropriate case class.
     *
