@@ -31,7 +31,10 @@ object Request {
       val response = resp.getResponseBody
       if (resp.getStatusCode != 200) throw new Exception(response.toString)
       Json.parse(response).validate[T] match {
-        case JsError(e) => throw new Exception(e.toString())
+        case JsError(e) => {
+          val errorMessage = s"----Response: ${response.toString}\n\n----ErrorMessage: ${e.toString}"
+          throw new Exception(errorMessage)
+        }
         case JsSuccess(value, _) => value match {
           case None => Response[T](None, resp)
           case _ => Response[T](Some(value), resp)
