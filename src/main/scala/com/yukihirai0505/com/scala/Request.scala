@@ -9,8 +9,9 @@ import dispatch._
 
 object Request {
 
-  /***
+  /**
     * Get Base request with cookies
+    *
     * @param requestUrl
     * @param cookies
     */
@@ -39,7 +40,7 @@ object Request {
     }
   }
 
-  /** *
+  /**
     * Add cookies to Request
     *
     * @param cookies
