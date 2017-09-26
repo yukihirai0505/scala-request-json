@@ -29,15 +29,18 @@ object Request {
   def sendRequestJson[T](request: Req)(implicit r: Reads[T]): Future[Response[T]] = {
     Http(request).map { resp =>
       val response = resp.getResponseBody
-      if (resp.getStatusCode != 200) throw new Exception(response.toString)
-      Json.parse(response).validate[T] match {
-        case JsError(e) =>
-          val errorMessage = s"----Response: ${response.toString}\n\n----ErrorMessage: ${e.toString}"
-          throw new Exception(errorMessage)
-        case JsSuccess(value, _) => value match {
-          case None => Response[T](None, resp)
-          case _ => Response[T](Some(value), resp)
+      try {
+        if (resp.getStatusCode != 200) throw new Exception(response.toString)
+        Json.parse(response).validate[T] match {
+          case JsError(e) =>
+            val errorMessage = s"----Response: ${response.toString}\n\n----ErrorMessage: ${e.toString}"
+            throw new Exception(errorMessage)
+          case JsSuccess(value, _) => value match {
+            case None => Response[T](None, resp)
+            case _ => Response[T](Some(value), resp)
+          }
         }
+      } catch {
         case e: Exception =>
           val errorMessage = s"----Response: ${response.toString}\n\n----ErrorMessage: ${e.toString}"
           throw new Exception(errorMessage)
