@@ -18,7 +18,7 @@ Also, you need to include the library as your dependency:
 libraryDependencies += "com.yukihirai0505" % "scala-request-json_2.11" % "1.5"
 ```
 
-http://mvnrepository.com/artifact/com.yukihirai0505/scala-request-json_2.11/1.5
+https://search.maven.org/#artifactdetails%7Ccom.yukihirai0505%7Cscala-request-json_2.11%7C1.5%7Cjar
 
 ## Submodule usage
 
