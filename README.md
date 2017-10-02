@@ -15,10 +15,10 @@ resolvers += Resolver.sonatypeRepo("releases")
 Also, you need to include the library as your dependency:
 
 ```scala
-libraryDependencies += "com.yukihirai0505" % "scala-request-json_2.11" % "1.5"
+libraryDependencies += "com.yukihirai0505" % "scala-request-json_2.11" % "1.6"
 ```
 
-https://search.maven.org/#artifactdetails%7Ccom.yukihirai0505%7Cscala-request-json_2.11%7C1.5%7Cjar
+https://search.maven.org/#artifactdetails%7Ccom.yukihirai0505%7Cscala-request-json_2.11%7C1.6%7Cjar
 
 ## Submodule usage
 

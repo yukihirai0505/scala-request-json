@@ -1,11 +1,10 @@
 package com.yukihirai0505.com.scala
 
-import play.api.libs.json._
-
 import com.ning.http.client.cookie.Cookie
 import com.yukihirai0505.com.scala.model.Response
 import dispatch.Defaults._
 import dispatch._
+import play.api.libs.json._
 
 object Request {
 
@@ -30,10 +29,10 @@ object Request {
     Http(request).map { resp =>
       val response = resp.getResponseBody
       try {
-        if (resp.getStatusCode != 200) throw new Exception(response.toString)
+        if (resp.getStatusCode != 200) throw new Exception(response)
         Json.parse(response).validate[T] match {
           case JsError(e) =>
-            val errorMessage = s"----Response: ${response.toString}\n\n----ErrorMessage: ${e.toString}"
+            val errorMessage = s"----url: ${request.url}\n----Response: $response\n----ErrorMessage: ${e.toString}\n"
             throw new Exception(errorMessage)
           case JsSuccess(value, _) => value match {
             case None => Response[T](None, resp)
@@ -42,7 +41,7 @@ object Request {
         }
       } catch {
         case e: Exception =>
-          val errorMessage = s"----Response: ${response.toString}\n\n----ErrorMessage: ${e.toString}"
+          val errorMessage = s"----url: ${request.url}\n----Response: $response\n----ErrorMessage: ${e.getMessage}\n"
           throw new Exception(errorMessage)
       }
     }
