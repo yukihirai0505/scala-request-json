@@ -1,6 +1,6 @@
 name := """scala-request-json"""
 
-version := "1.6"
+version := "1.7"
 
 scalaVersion := "2.11.7"
 
@@ -10,7 +10,7 @@ lazy val scalaRequestJson = Project(id = "scala-request-json", base = file("./")
 libraryDependencies ++= {
   Seq(
     "com.typesafe.play" % "play-json_2.11" % "2.5.9",
-    "net.databinder.dispatch" %% "dispatch-core" % "0.11.3",
+    "net.databinder.dispatch" %% "dispatch-core" % "0.11.4",
     "com.netaporter" %% "scala-uri" % "0.4.16",
     "ai.x" %% "play-json-extensions" % "0.8.0",
     "com.github.tototoshi" %% "play-json-naming" % "1.1.0",

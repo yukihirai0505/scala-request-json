@@ -25,9 +25,9 @@ object Request {
     * @tparam T represent the type of the facebook data requested
     * @return a Future of Response[T]
     */
-  def sendRequestJson[T](request: Req)(implicit r: Reads[T]): Future[Response[T]] = {
+  def sendRequestJson[T](request: Req, charset: String = "UTF-8")(implicit r: Reads[T]): Future[Response[T]] = {
     Http(request).map { resp =>
-      val response = resp.getResponseBody
+      val response = resp.getResponseBody(charset)
       try {
         if (resp.getStatusCode != 200 || resp.getStatusCode != 400) throw new Exception(response)
         Json.parse(response).validate[T] match {
