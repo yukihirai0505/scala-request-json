@@ -29,7 +29,7 @@ object Request {
     Http(request).map { resp =>
       val response = resp.getResponseBody
       try {
-        if (resp.getStatusCode != 200) throw new Exception(response)
+        if (resp.getStatusCode != 200 || resp.getStatusCode != 400) throw new Exception(response)
         Json.parse(response).validate[T] match {
           case JsError(e) =>
             val errorMessage = s"----url: ${request.url}\n----Response: $response\n----ErrorMessage: ${e.toString}\n"
