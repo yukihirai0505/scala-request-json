@@ -32,7 +32,7 @@ object Request {
         if (resp.getStatusCode == 500) throw new Exception(response)
         Json.parse(response).validate[T] match {
           case JsError(e) =>
-            val errorMessage = s"----url: ${request.url}\n----Response: $response\n----ErrorMessage: ${e.toString}\n"
+            val errorMessage = s"----ErrorMessage: ${e.toString}\n----url: ${request.url}\n----Response: $response\n"
             throw new Exception(errorMessage)
           case JsSuccess(value, _) => value match {
             case None => Response[T](None, resp)
@@ -41,7 +41,7 @@ object Request {
         }
       } catch {
         case e: Exception =>
-          val errorMessage = s"----url: ${request.url}\n----Response: $response\n----ErrorMessage: ${e.getMessage}\n"
+          val errorMessage = s"----ErrorMessage: ${e.getMessage}\n----url: ${request.url}\n----Response: $response\n"
           throw new Exception(errorMessage)
       }
     }
