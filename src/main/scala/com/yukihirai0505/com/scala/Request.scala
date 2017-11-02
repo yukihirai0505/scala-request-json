@@ -1,12 +1,28 @@
 package com.yukihirai0505.com.scala
 
+import java.util.concurrent.Executors
+
 import com.ning.http.client.cookie.Cookie
+import com.ning.http.client.{AsyncHttpClient, AsyncHttpClientConfig}
 import com.yukihirai0505.com.scala.model.Response
 import dispatch.Defaults._
 import dispatch._
 import play.api.libs.json._
 
 object Request {
+
+  private val executorService = Executors.newFixedThreadPool(10)
+  private val asyncHttpClient = new AsyncHttpClient(
+    new AsyncHttpClientConfig.Builder()
+      .setExecutorService(executorService)
+      .setIOThreadMultiplier(1)
+      .setAllowPoolingConnections(true)
+      .setAllowPoolingSslConnections(true)
+      .setConnectTimeout(3000)
+      .setRequestTimeout(10000)
+      .setCompressionEnforced(true)
+      .setFollowRedirect(true).build)
+  private val httpClient = new Http(asyncHttpClient)
 
   /**
     * Get Base request with cookies
@@ -26,7 +42,7 @@ object Request {
     * @return a Future of Response[T]
     */
   def sendRequestJson[T](request: Req, charset: String = "UTF-8")(implicit r: Reads[T]): Future[Response[T]] = {
-    Http(request).map { resp =>
+    httpClient(request).map { resp =>
       val response = resp.getResponseBody(charset)
       try {
         if (resp.getStatusCode == 500) throw new Exception(response)
